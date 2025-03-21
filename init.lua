@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -1027,34 +1027,6 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
---
-vim.cmd [[
-augroup RestoreCursorShapeOnExit
-    autocmd!
-    autocmd VimLeave * set guicursor=a:ver20
-augroup END
-]]
 
-if vim.g.neovide then
-  vim.opt.guifont = { 'FiraCode Nerd Font Mono', ':h11' }
-  vim.g.neovide_scale_factor = 1.0
-
-  vim.g.neovide_floating_blur_amount_x = 2.0
-  vim.g.neovide_floating_blur_amount_y = 2.0
-  -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
-  vim.g.neovide_transparency = 0.9
-  vim.g.transparency = 0.8
-
-  vim.g.neovide_cursor_animation_length = 0
-  vim.api.nvim_set_keymap('v', '<sc-c>', '"+y', { noremap = true })
-  vim.api.nvim_set_keymap('n', '<sc-v>', 'l"+P', { noremap = true })
-  vim.api.nvim_set_keymap('v', '<sc-v>', '"+P', { noremap = true })
-  vim.api.nvim_set_keymap('c', '<sc-v>', '<C-o>l<C-o>"+<C-o>P<C-o>l', { noremap = true })
-  vim.api.nvim_set_keymap('i', '<sc-v>', '<ESC>l"+Pli', { noremap = true })
-  vim.api.nvim_set_keymap('t', '<sc-v>', '<C-\\><C-n>"+Pi', { noremap = true })
-end
-
-vim.o.laststatus = 3
-
-vim.opt['tabstop'] = 4
-vim.opt['shiftwidth'] = 4
+local user = require 'user'
+user.setup()
