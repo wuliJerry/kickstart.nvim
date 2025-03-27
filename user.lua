@@ -27,6 +27,18 @@ function M.setup_editor()
   vim.opt['shiftwidth'] = 4
   vim.api.nvim_set_keymap('n', '<C-j>', '4j', { noremap = true })
   vim.api.nvim_set_keymap('n', '<C-k>', '4k', { noremap = true })
+
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'make',
+    callback = function()
+      vim.opt_local.expandtab = false
+      vim.opt_local.tabstop = 8 -- Make uses 8-column tabs by convention
+    end,
+  })
+
+  -- Optionally show tab characters for visual debugging
+  vim.opt['list'] = true
+  vim.opt['listchars'] = { tab = '→ ', space = '·' }
 end
 
 function M.setup()
