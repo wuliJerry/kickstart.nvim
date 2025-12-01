@@ -684,6 +684,21 @@ require('lazy').setup({
         -- ts_ls = {},
         --
 
+        -- C/C++ language server (using system installation)
+        clangd = {
+          mason = false, -- Don't install via Mason, use system clangd
+        },
+
+        -- Rust language server
+        rust_analyzer = {
+          mason = false, -- Don't install via Mason, use system rust-analyzer
+        },
+
+        -- Python language server
+        pylsp = {
+          mason = false, -- Don't install via Mason, use system pylsp
+        },
+
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -714,6 +729,10 @@ require('lazy').setup({
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
+      -- Remove servers that should use system installation
+      ensure_installed = vim.tbl_filter(function(name)
+        return servers[name] and servers[name].mason ~= false
+      end, ensure_installed)
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
@@ -835,7 +854,7 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'default',
+        preset = 'enter',
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
