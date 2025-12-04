@@ -999,6 +999,14 @@ require('lazy').setup({
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
+  -- K Framework editor support
+  {
+    'kframework/k-editor-support',
+    config = function()
+      vim.opt.runtimepath:append(vim.fn.stdpath 'data' .. '/lazy/k-editor-support/vim')
+    end,
+  },
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
